@@ -4,9 +4,15 @@ import 'providers/product_provider.dart';
 import 'providers/cart_provider.dart';
 import 'providers/auth_provider.dart';
 import 'screens/home.dart';
+import 'package:projeto/screens/carrinho.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => Cart(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -24,6 +30,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(primarySwatch: Colors.pink),
         home: HomeScreen(),
         debugShowCheckedModeBanner: false,
+        routes: {
+          CartScreen.routeName: (context) => CartScreen(),
+        },
       ),
     );
   }

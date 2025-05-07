@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/product.dart';
 import '../screens/detalhes.dart';
+import 'package:projeto/providers/cart_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProductItem extends StatelessWidget {
   
@@ -11,6 +13,7 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context, listen: false);
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -45,6 +48,15 @@ class ProductItem extends StatelessWidget {
               child: Text(product.name, style: TextStyle(fontWeight: FontWeight.bold)),
             ),
             Text('R\$ ${product.price.toStringAsFixed(2)}', style: TextStyle(color: Colors.pink)),
+            IconButton(
+              icon: Icon(Icons.add_shopping_cart),
+              onPressed: () {
+                cart.addToCart(product);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('${product.name} foi adicionado ao carrinho!')),
+                );
+              },
+            ),
           ],
         ),
       ),
