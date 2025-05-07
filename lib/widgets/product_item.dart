@@ -22,19 +22,24 @@ class ProductItem extends StatelessWidget {
         elevation: 4,
         child: Column(
           children: [
-            Image.network(
-              product.imageLink, 
-              height: 100, 
-              fit: BoxFit.cover,
-              width: double.infinity,
-              errorBuilder: (context, error, stackTrace) {
-                return Image.asset(
-                  'assets/download.jpg',
+            Expanded(
+              child: Hero(
+                tag: product.imageLink,
+                child: Image.network(
+                  product.imageLink,
                   fit: BoxFit.cover,
                   width: double.infinity,
-                );
-              },
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset(
+                      'assets/download.jpg',
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    );
+                  },
+                ),
               ),
+            ),
+
             Padding(
               padding: const EdgeInsets.all(8),
               child: Text(product.name, style: TextStyle(fontWeight: FontWeight.bold)),
