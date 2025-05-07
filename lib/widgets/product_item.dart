@@ -3,9 +3,11 @@ import '../models/product.dart';
 import '../screens/detalhes.dart';
 
 class ProductItem extends StatelessWidget {
+  
   final Product product;
 
-  ProductItem({required this.product});
+  const ProductItem({super.key, required this.product});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,19 @@ class ProductItem extends StatelessWidget {
         elevation: 4,
         child: Column(
           children: [
-            Image.network(product.imageLink, height: 100, fit: BoxFit.cover),
+            Image.network(
+              product.imageLink, 
+              height: 100, 
+              fit: BoxFit.cover,
+              width: double.infinity,
+              errorBuilder: (context, error, stackTrace) {
+                return Image.asset(
+                  'assets/download.jpg',
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                );
+              },
+              ),
             Padding(
               padding: const EdgeInsets.all(8),
               child: Text(product.name, style: TextStyle(fontWeight: FontWeight.bold)),

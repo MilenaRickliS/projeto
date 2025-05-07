@@ -4,13 +4,13 @@ import '../models/product.dart';
 class ProductDetailScreen extends StatefulWidget {
   final Product product;
 
-  const ProductDetailScreen({required this.product});
+  const ProductDetailScreen({super.key, required this.product});
 
   @override
-  _ProductDetailScreenState createState() => _ProductDetailScreenState();
+  ProductDetailScreenState createState() => ProductDetailScreenState();
 }
 
-class _ProductDetailScreenState extends State<ProductDetailScreen> {
+class ProductDetailScreenState extends State<ProductDetailScreen> {
   bool _expanded = false;
 
   @override
@@ -37,6 +37,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     height: screenHeight * 0.4,
                     width: double.infinity,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        'assets/download.jpg',
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                      );
+                    },
                   ),
                 ),
                 Padding(
