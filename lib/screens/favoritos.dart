@@ -20,7 +20,27 @@ class FavoritesScreen extends StatelessWidget {
           : GridView.builder(
               padding: const EdgeInsets.all(10),
               itemCount: favoriteProducts.length,
-              itemBuilder: (ctx, i) => ProductItem(product: favoriteProducts[i]),
+              itemBuilder: (ctx, i) {
+                final product = favoriteProducts[i];
+                return Stack(
+                  children: [
+                    ProductItem(product: product),
+                    Positioned(
+                      top: 4,
+                      right: 4,
+                      child: IconButton(
+                        icon: Icon(Icons.close, color: Colors.red),
+                        onPressed: () {
+                          favoritesProvider.toggleFavorite(product);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('${product.name} removido dos favoritos')),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              },
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 3 / 4,

@@ -75,6 +75,13 @@ class ProductItemState extends State<ProductItem> {
                       ),
                       onPressed: () {
                         favoritesProvider.toggleFavorite(widget.product);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(
+                            isFav
+                              ? '${widget.product.name} removido dos favoritos.'
+                              : '${widget.product.name} adicionado aos favoritos.',
+                          )),
+                        );
                       },
                     );
                   },
