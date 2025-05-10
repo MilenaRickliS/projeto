@@ -28,6 +28,12 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(title: Text('Catálogo de Produtos'),
          actions: [
           IconButton(
+            icon: Icon(Icons.favorite),
+            onPressed: () {
+              Navigator.pushNamed(context, '/favoritos'); 
+            },
+          ),
+          IconButton(
             icon: Icon(Icons.shopping_cart),
             onPressed: () {
               Navigator.pushNamed(context, CartScreen.routeName);

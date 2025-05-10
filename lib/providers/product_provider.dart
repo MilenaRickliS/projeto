@@ -11,4 +11,5 @@ class ProductProvider with ChangeNotifier {
     _products = await ApiService.fetchProducts();
     notifyListeners();
   }
+
 }
