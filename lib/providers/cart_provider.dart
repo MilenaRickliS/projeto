@@ -16,13 +16,23 @@ class Cart with ChangeNotifier {
     if (_items.contains(existingCartItem)) {
       existingCartItem.quantity++;
     } else {
-      _items.add(CartItem(product: product));
+      _items.add(CartItem(product: product, quantity: 1));
     }
     notifyListeners();
   }
 
-  double get totalAmount {
-    return _items.fold(0, (sum, item) => sum + item.totalPrice);
+  void increaseQuantity(CartItem item) {
+    item.quantity++;
+    notifyListeners();
+  }
+
+  void decreaseQuantity(CartItem item) {
+    if (item.quantity > 1) {
+      item.quantity--;
+    } else {
+      removeFromCart(item);
+    }
+    notifyListeners();
   }
 
   void removeFromCart(CartItem item) {
@@ -33,5 +43,9 @@ class Cart with ChangeNotifier {
   void clear() {
     _items = [];
     notifyListeners();
+  }
+
+  double get totalAmount {
+    return _items.fold(0, (sum, item) => sum + item.totalPrice);
   }
 }

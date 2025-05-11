@@ -4,11 +4,16 @@ import '../providers/auth_provider.dart';
 import 'home.dart';
 import 'cadastro.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
-  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +31,26 @@ class LoginScreen extends StatelessWidget {
             ElevatedButton(
               child: Text("Entrar"),
               onPressed: () async {
-                await authProvider.signIn(emailController.text, passwordController.text);
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeScreen()));
+                await authProvider.signIn(
+                  emailController.text,
+                  passwordController.text,
+                );
+
+                if (!mounted) return;
+
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (_) => HomeScreen()),
+                );
               },
             ),
             TextButton(
               child: Text("Não tem conta? Cadastre-se"),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) => RegisterScreen()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const RegisterScreen()),
+                );
               },
             )
           ],

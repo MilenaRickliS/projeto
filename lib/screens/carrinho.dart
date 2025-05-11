@@ -29,41 +29,63 @@ class CartScreen extends StatelessWidget {
                   ),
                   title: Text(cartItem.product.name),
                   subtitle: Text('R\$ ${cartItem.product.price.toStringAsFixed(2)}'),
-                  trailing: Column(
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('x${cartItem.quantity}'),
                       IconButton(
-                        icon: Icon(Icons.remove_circle),
+                        icon: Icon(Icons.remove),
                         onPressed: () {
-                          cart.removeFromCart(cartItem);
+                          cart.decreaseQuantity(cartItem);
                         },
-                      )
+                      ),
+                      Text('${cartItem.quantity}'),
+                      IconButton(
+                        icon: Icon(Icons.add),
+                        onPressed: () {
+                          cart.increaseQuantity(cartItem);
+                        },
+                      ),
                     ],
                   ),
                 );
               },
             ),
       bottomNavigationBar: cart.items.isEmpty
-          ? SizedBox.shrink()
-          : Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Total: R\$ ${cart.totalAmount.toStringAsFixed(2)}',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  ElevatedButton(
+        ? SizedBox.shrink()
+        : Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Total: R\$ ${cart.totalAmount.toStringAsFixed(2)}',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Finalizar compra
+                        cart.clear();
+                      },
+                      child: Text('Finalizar Compra'),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
                     onPressed: () {
-  
                       cart.clear();
                     },
-                    child: Text('Finalizar Compra'),
+                    child: Text('Limpar Carrinho', style: TextStyle(color: Colors.red)),
                   ),
-                ],
-              ),
+                )
+              ],
             ),
+          ),
     );
   }
 }
