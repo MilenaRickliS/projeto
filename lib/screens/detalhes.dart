@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/product.dart';
+import '../providers/cart_provider.dart';
+import '../providers/favorites_provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final Product product;
@@ -19,10 +22,45 @@ class ProductDetailScreenState extends State<ProductDetailScreen> {
     final screenHeight = mediaQuery.size.height;
     final screenWidth = mediaQuery.size.width;
 
+    final cart = Provider.of<Cart>(context, listen: false);
+    final favoritesProvider = Provider.of<FavoritesProvider>(context);
+    final isFav = favoritesProvider.isFavorite(widget.product.id);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.product.name),
         backgroundColor: Colors.pinkAccent,
+        actions: [
+          IconButton(
+            icon: Icon(
+              isFav ? Icons.favorite : Icons.favorite_border,
+              color: isFav ? Colors.red : Colors.white,
+            ),
+            onPressed: () {
+              favoritesProvider.toggleFavorite(widget.product);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    isFav
+                        ? '${widget.product.name} removido dos favoritos.'
+                        : '${widget.product.name} adicionado aos favoritos.',
+                  ),
+                ),
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.add_shopping_cart),
+            onPressed: () {
+              cart.addToCart(widget.product);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('${widget.product.name} foi adicionado ao carrinho!'),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: LayoutBuilder(
         builder: (ctx, constraints) {
