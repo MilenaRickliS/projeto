@@ -37,6 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
           IconButton(
+            icon: Icon(Icons.filter_list),
+            onPressed: () {
+              Navigator.pushNamed(context, '/filtro');
+            },
+          ),
+          IconButton(
             icon: Icon(Icons.shopping_cart),
             onPressed: () {
               Navigator.pushNamed(context, CartScreen.routeName);

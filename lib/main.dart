@@ -10,6 +10,7 @@ import 'package:projeto/screens/favoritos.dart';
 import 'screens/home.dart'; 
 import 'screens/carrinho.dart'; 
 import 'screens/login.dart';
+import 'screens/categorias.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
       routes: {        
         CartScreen.routeName: (context) => const CartScreen(), 
         '/favoritos': (context) => const FavoritesScreen(),
+        '/filtro': (context) => const FilterScreen(),
       },
     );
   }
