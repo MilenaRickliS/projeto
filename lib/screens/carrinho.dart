@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:projeto/providers/cart_provider.dart';
 import 'package:projeto/screens/endereco.dart';
 import 'package:projeto/providers/auth_provider.dart';  
+import 'package:projeto/screens/login.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -67,10 +68,15 @@ class CartScreen extends StatelessWidget {
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     ElevatedButton(
-                      onPressed: () {                        
-                        if (user == null) {                         
-                          Navigator.pushNamed(context, '/login');
-                        } else {          
+                      onPressed: () {
+                        if (user == null) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginScreen(fromCart: true),
+                            ),
+                          );
+                        } else {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => ConfirmAddressScreen()),

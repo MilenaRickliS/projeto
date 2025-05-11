@@ -16,6 +16,7 @@ import 'screens/pedidos.dart';
 import 'screens/endereco.dart';  
 import 'screens/pagamento.dart';  
 import 'screens/confirmar.dart';  
+import 'screens/detalhes_pedidos.dart'; 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,6 +61,8 @@ class MyApp extends StatelessWidget {
         '/confirm-address': (context) => _checkAuth(context, ConfirmAddressScreen()),  
         '/payment-method': (context) => _checkAuth(context, PaymentMethodScreen()),  
         '/confirm-order': (context) => _checkAuth(context, ConfirmOrderScreen()),  
+        '/order-detail': (context) => OrderDetailScreen(pedido: {}), 
+
       },
     );
   }

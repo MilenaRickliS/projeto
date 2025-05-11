@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import 'home.dart';
+import 'endereco.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+  final bool fromCart;
+  const RegisterScreen({super.key, this.fromCart = false});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -91,10 +93,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                   if (!mounted) return;
 
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (_) => HomeScreen()),
-                  );
+                  if (widget.fromCart) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => ConfirmAddressScreen()),
+                    );
+                  } else {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => HomeScreen()),
+                    );
+                  }
                 } catch (e) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Erro ao cadastrar: $e')),

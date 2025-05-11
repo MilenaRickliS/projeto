@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import 'dart:developer';
+import 'detalhes_pedidos.dart'; 
 
 
 class OrdersScreen extends StatelessWidget {
@@ -61,7 +62,12 @@ class OrdersScreen extends StatelessWidget {
                 title: Text('Pedido #${pedidoData['uidPedido']}'),
                 subtitle: Text('Total: R\$ $total\nForma de Pagamento: $formaPagamento'),
                 onTap: () {
-                  
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OrderDetailScreen(pedido: pedidoData),
+                    ),
+                  );
                 },
               );
             },

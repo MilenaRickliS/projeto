@@ -3,9 +3,12 @@ import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import 'home.dart';
 import 'cadastro.dart';
+import 'endereco.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  final bool fromCart;
+  const LoginScreen({super.key,  this.fromCart = false});
+  
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -38,10 +41,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 if (!mounted) return;
 
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => HomeScreen()),
-                );
+                if (widget.fromCart) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (_) => ConfirmAddressScreen()),
+                  );
+                } else {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (_) => HomeScreen()),
+                  );
+                }
               },
             ),
             TextButton(
@@ -49,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const RegisterScreen()),
+                  MaterialPageRoute(builder: (_) => RegisterScreen(fromCart: widget.fromCart)),
                 );
               },
             )
