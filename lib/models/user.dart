@@ -1,16 +1,16 @@
 class UserModel {
-  final String uid;
-  final String email;
-  final String nome;
-  final String cpf;
-  final String dataNascimento;
-  final String telefone;
-  final String genero;
-  final String cep;
-  final String rua;
-  final String numeroCasa;
-  final String cidade;
-  final String estado;
+  String uid;
+  String email;
+  String nome;
+  String cpf;
+  String dataNascimento;
+  String telefone;
+  String genero;
+  String cep;
+  String rua;
+  String numeroCasa;
+  String cidade;
+  String estado;
 
   UserModel({
     required this.uid,
@@ -60,4 +60,20 @@ class UserModel {
       'estado': estado,
     };
   }
+
+    set setRua(String newRua) {
+      rua = newRua;
+    }
+
+    set setNumeroCasa(String newNumeroCasa) {
+      numeroCasa = newNumeroCasa;
+    }
+
+    set setCidade(String newCidade) {
+      cidade = newCidade;
+    }
+
+    set setEstado(String newEstado) {
+      estado = newEstado;
+    }
 }

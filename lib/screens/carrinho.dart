@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:projeto/providers/cart_provider.dart';
+import 'package:projeto/screens/endereco.dart';
+import 'package:projeto/providers/auth_provider.dart';  
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -9,6 +11,9 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
+    final authProvider = Provider.of<AuthProvider>(context);  
+    final user = authProvider.user;  
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Carrinho de Compras'),
@@ -22,11 +27,8 @@ class CartScreen extends StatelessWidget {
                 return ListTile(
                   leading: Image.network(cartItem.product.imageLink,
                   errorBuilder: (context, error, stackTrace) {
-                    return Image.asset(
-                      'assets/download.jpg'
-                    );
-                  },
-                  ),
+                    return Image.asset('assets/download.jpg');
+                  }),
                   title: Text(cartItem.product.name),
                   subtitle: Text('R\$ ${cartItem.product.price.toStringAsFixed(2)}'),
                   trailing: Row(
@@ -65,9 +67,15 @@ class CartScreen extends StatelessWidget {
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     ElevatedButton(
-                      onPressed: () {
-                        // Finalizar compra
-                        cart.clear();
+                      onPressed: () {                        
+                        if (user == null) {                         
+                          Navigator.pushNamed(context, '/login');
+                        } else {          
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ConfirmAddressScreen()),
+                          );
+                        }
                       },
                       child: Text('Finalizar Compra'),
                     ),

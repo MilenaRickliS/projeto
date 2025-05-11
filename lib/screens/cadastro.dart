@@ -96,7 +96,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     MaterialPageRoute(builder: (_) => HomeScreen()),
                   );
                 } catch (e) {
-                  // Mostra erro na interface
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Erro ao cadastrar: $e')),
                   );

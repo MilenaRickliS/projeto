@@ -72,4 +72,25 @@ class AuthProvider with ChangeNotifier {
     _user = null;
     notifyListeners();
   }
+
+  void updateUserAddress(String rua, String numero, String cidade, String estado) async {
+    if (_user != null) {
+      
+      _user!.rua = rua;
+      _user!.numeroCasa = numero;
+      _user!.cidade = cidade;
+      _user!.estado = estado;
+      
+      
+      await _firestore.collection('usuarios').doc(_user!.uid).update({
+        'rua': rua,
+        'numeroCasa': numero,
+        'cidade': cidade,
+        'estado': estado,
+      });
+
+      notifyListeners(); 
+    }
+  }
+
 }
