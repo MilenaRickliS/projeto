@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import '../providers/product_provider.dart';
 import '../widgets/product_item.dart';
 import 'package:projeto/screens/carrinho.dart';
-import '../providers/auth_provider.dart';
-import 'login.dart';
+import 'package:carousel_slider/carousel_slider.dart' as carousel_lib;
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,34 +26,64 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
-    final authProvider = Provider.of<AuthProvider>(context);
 
     return MainScaffold(
       selectedIndex: 0,
       body: Column(
         children: [
-          AppBar(title: Text('Catálogo de Produtos'),
+          AppBar(title: Icon(Icons.storefront_sharp, color: const Color.fromARGB(255, 1, 88, 10), size: 28),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          elevation: 0,
           actions: [
             IconButton(
-              icon: Icon(Icons.search),
+              icon: Icon(Icons.search, color: const Color.fromARGB(255, 1, 88, 10), size: 28),
               onPressed: () {
                 Navigator.pushNamed(context, '/pesquisa'); 
               },
             ),
             IconButton(
-              icon: Icon(Icons.favorite),
+              icon: Icon(Icons.favorite, color: const Color.fromARGB(255, 1, 88, 10), size: 28),
               onPressed: () {
                 Navigator.pushNamed(context, '/favoritos'); 
               },
             ),
             IconButton(
-              icon: Icon(Icons.shopping_cart),
+              icon: Icon(Icons.shopping_cart, color: const Color.fromARGB(255, 1, 88, 10), size: 28),
               onPressed: () {
                 Navigator.pushNamed(context, CartScreen.routeName);
               },
             ),
           ],
         ),
+        const Divider(height: 1, color: Color.fromARGB(255, 206, 205, 205)),
+        carousel_lib.CarouselSlider(
+        options: carousel_lib.CarouselOptions(
+          height: 180,
+          autoPlay: true,
+          enlargeCenterPage: true,
+          viewportFraction: 0.9,
+          autoPlayInterval: Duration(seconds: 3),
+        ),
+        items: [
+          'assets/slide1.jpg',
+          'assets/slide2.jpg',
+          'assets/slide3.jpg',
+          'assets/slide4.jpg',
+        ].map((imagePath) {
+          return Builder(
+            builder: (BuildContext context) {
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.cover,
+                  width: MediaQuery.of(context).size.width,
+                ),
+              );
+            },
+          );
+        }).toList(),
+      ),
         Expanded(
           child: FutureBuilder(
             future: _productsFuture,

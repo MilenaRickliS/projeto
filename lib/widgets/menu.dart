@@ -4,6 +4,8 @@ import '../screens/categorias.dart';
 import '../screens/pesquisa.dart';
 import '../screens/pedidos.dart';
 import '../screens/login.dart';
+import 'package:provider/provider.dart';
+import 'package:projeto/providers/auth_provider.dart';
 
 class MainScaffold extends StatelessWidget {
   final Widget body;
@@ -12,6 +14,8 @@ class MainScaffold extends StatelessWidget {
   const MainScaffold({super.key, required this.body, required this.selectedIndex});
 
   void _onItemTapped(BuildContext context, int index) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final isLoggedIn = authProvider.user != null;
     switch (index) {
       case 0:
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeScreen()));
@@ -23,7 +27,11 @@ class MainScaffold extends StatelessWidget {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => SearchScreen()));
         break;
       case 3:
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => OrdersScreen()));
+        if (isLoggedIn) {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => OrdersScreen()));
+        } else {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const LoginScreen()));
+        }
         break;
       case 4:
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => LoginScreen()));
