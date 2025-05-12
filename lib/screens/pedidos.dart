@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import 'dart:developer';
 import 'detalhes_pedidos.dart'; 
+import '../widgets/menu.dart';
 
 
 class OrdersScreen extends StatelessWidget {
@@ -15,8 +16,11 @@ class OrdersScreen extends StatelessWidget {
     final user = authProvider.user;
 
     if (user == null) {
-      return Scaffold(
+      return MainScaffold(
+      selectedIndex: 0, 
+      body: Scaffold(
         body: Center(child: CircularProgressIndicator()),
+      ),
       );
     }
 
@@ -27,16 +31,22 @@ class OrdersScreen extends StatelessWidget {
           .get(),
       builder: (ctx, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold(
+          return MainScaffold(
+          selectedIndex: 0, 
+          body: Scaffold(
             appBar: AppBar(title: Text('Meus Pedidos')),
             body: Center(child: CircularProgressIndicator()),
+          ),
           );
         }
 
         if (snapshot.hasError) {
-          return Scaffold(
+          return MainScaffold(
+            selectedIndex: 0, 
+            body: Scaffold(
             appBar: AppBar(title: Text('Meus Pedidos')),
             body: Center(child: Text('Erro ao carregar pedidos')),
+            ),
           );
         }
 
@@ -44,13 +54,18 @@ class OrdersScreen extends StatelessWidget {
         log("Pedidos carregados: $pedidos");
 
         if (pedidos.isEmpty) {
-          return Scaffold(
+          return MainScaffold(
+          selectedIndex: 0, 
+          body: Scaffold(
             appBar: AppBar(title: Text('Meus Pedidos')),
             body: Center(child: Text('Nenhum pedido encontrado')),
+          ),
           );
         }
 
-        return Scaffold(
+        return MainScaffold(
+          selectedIndex: 0, 
+          body: Scaffold(
           appBar: AppBar(title: Text('Meus Pedidos')),
           body: ListView.builder(
             itemCount: pedidos.length,
@@ -71,6 +86,7 @@ class OrdersScreen extends StatelessWidget {
                 },
               );
             },
+          ),
           ),
         );
       },

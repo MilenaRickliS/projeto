@@ -8,6 +8,7 @@ import 'providers/favorites_provider.dart';
 import 'providers/auth_provider.dart';
 import 'providers/order_provider.dart';
 import 'screens/favoritos.dart';
+import 'screens/pesquisa.dart';
 import 'screens/home.dart';
 import 'screens/carrinho.dart';
 import 'screens/login.dart';
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
       routes: {        
         CartScreen.routeName: (context) => const CartScreen(), 
         '/favoritos': (context) => const FavoritesScreen(),
+        '/pesquisa': (context) => const SearchScreen(),
         '/filtro': (context) => const FilterScreen(),
         '/login': (context) => const LoginScreen(),
         '/orders': (context) => _checkAuth(context, OrdersScreen()),  

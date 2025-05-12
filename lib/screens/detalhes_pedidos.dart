@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/menu.dart';
 
 class OrderDetailScreen extends StatelessWidget {
   final Map<String, dynamic> pedido;
@@ -9,7 +10,9 @@ class OrderDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final itens = List<Map<String, dynamic>>.from(pedido['itens'] ?? []);
 
-    return Scaffold(
+    return MainScaffold(
+      selectedIndex: 0, 
+      body: Scaffold(
       appBar: AppBar(
         title: Text('Detalhes do Pedido #${pedido['uidPedido']}'),
       ),
@@ -38,6 +41,7 @@ class OrderDetailScreen extends StatelessWidget {
           })
           ],
         ),
+      ),
       ),
     );
   }

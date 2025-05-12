@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/favorites_provider.dart';
 import '../providers/product_provider.dart';
 import '../widgets/product_item.dart';
+import '../widgets/menu.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
@@ -13,7 +14,9 @@ class FavoritesScreen extends StatelessWidget {
     final favoritesProvider = Provider.of<FavoritesProvider>(context);
     final favoriteProducts = favoritesProvider.getFavoriteProductsFrom(allProducts);
 
-    return Scaffold(
+    return MainScaffold(
+      selectedIndex: 0, 
+      body: Scaffold( 
       appBar: AppBar(title: Text('Favoritos')),
       body: favoriteProducts.isEmpty
           ? Center(child: Text('Nenhum produto favorito ainda.'))
@@ -48,6 +51,7 @@ class FavoritesScreen extends StatelessWidget {
                 mainAxisSpacing: 10,
               ),
             ),
+      ),
     );
   }
 }
