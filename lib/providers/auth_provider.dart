@@ -73,9 +73,10 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateUserAddress(String rua, String numero, String cidade, String estado) async {
+  void updateUserAddress(String cep, String rua, String numero, String cidade, String estado) async {
     if (_user != null) {
       
+      _user!.cep = cep;
       _user!.rua = rua;
       _user!.numeroCasa = numero;
       _user!.cidade = cidade;
@@ -83,6 +84,7 @@ class AuthProvider with ChangeNotifier {
       
       
       await _firestore.collection('usuarios').doc(_user!.uid).update({
+        'cep': cep,
         'rua': rua,
         'numeroCasa': numero,
         'cidade': cidade,
@@ -92,5 +94,4 @@ class AuthProvider with ChangeNotifier {
       notifyListeners(); 
     }
   }
-
 }

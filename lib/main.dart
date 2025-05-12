@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  // Função para proteger a rota
+  
   Widget _checkAuth(BuildContext context, Widget screen) {
     final authProvider = Provider.of<AuthProvider>(context);
     
