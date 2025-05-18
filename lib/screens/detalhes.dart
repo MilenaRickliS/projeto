@@ -30,8 +30,12 @@ class ProductDetailScreenState extends State<ProductDetailScreen> {
             selectedIndex: 0, 
             body: Scaffold(
             appBar: AppBar(
-              title: Text(widget.product.name),
-              backgroundColor: Colors.pinkAccent,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.white),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              title: Text(widget.product.name, style: TextStyle(color: Colors.white),),
+              backgroundColor: Color.fromARGB(255, 1, 88, 10),
               actions: [
                 IconButton(
                   icon: Icon(
@@ -52,7 +56,7 @@ class ProductDetailScreenState extends State<ProductDetailScreen> {
                   },
                 ),
                 IconButton(
-                  icon: Icon(Icons.add_shopping_cart),
+                  icon: Icon(Icons.add_shopping_cart, color: Colors.white,),
                   onPressed: () {
                     cart.addToCart(widget.product);
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -90,14 +94,14 @@ class ProductDetailScreenState extends State<ProductDetailScreen> {
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
                           widget.product.brand,
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey[700]),
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color.fromARGB(255, 0, 0, 0)),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
                           'R\$ ${widget.product.price.toStringAsFixed(2)}',
-                          style: TextStyle(fontSize: 24, color: Colors.pink, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 24, color: Color.fromARGB(255, 212, 51, 91), fontWeight: FontWeight.bold),
                         ),
                       ),
                       Padding(
@@ -114,7 +118,7 @@ class ProductDetailScreenState extends State<ProductDetailScreen> {
                             padding: EdgeInsets.all(16),
                             width: screenWidth,
                             decoration: BoxDecoration(
-                              color: Colors.pink[50],
+                              color: const Color.fromARGB(255, 238, 161, 187),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             height: _expanded ? constraints.maxHeight * 0.4 : 100,

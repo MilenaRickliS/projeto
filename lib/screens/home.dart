@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final productProvider = Provider.of<ProductProvider>(context);
 
     return MainScaffold(
+      
       selectedIndex: 0,
       body: Column(
         children: [
@@ -84,6 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         }).toList(),
       ),
+      const SizedBox(height: 16),
         Expanded(
           child: FutureBuilder(
             future: _productsFuture,

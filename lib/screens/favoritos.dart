@@ -17,9 +17,33 @@ class FavoritesScreen extends StatelessWidget {
     return MainScaffold(
       selectedIndex: 0, 
       body: Scaffold( 
-      appBar: AppBar(title: Text('Favoritos')),
+      appBar: AppBar(title: Text('Favoritos',
+        style: TextStyle(
+            color: Color.fromARGB(255, 1, 88, 10),
+          ),
+      ),
+      ),
       body: favoriteProducts.isEmpty
-          ? Center(child: Text('Nenhum produto favorito ainda.'))
+          ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.favorite_border,
+                      size: 80,
+                      color: Colors.grey,
+                    ),
+                    SizedBox(height: 16),
+                    Text(
+                      'Nenhum produto favorito ainda.',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+              )
           : GridView.builder(
               padding: const EdgeInsets.all(10),
               itemCount: favoriteProducts.length,

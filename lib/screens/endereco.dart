@@ -29,7 +29,6 @@ class ConfirmAddressScreenState extends State<ConfirmAddressScreen> {
   void initState() {
     super.initState();
     final user = Provider.of<AuthProvider>(context, listen: false).user;
-
     if (user != null) {
       cepController.text = user.cep;
       ruaController.text = user.rua;
@@ -50,12 +49,11 @@ class ConfirmAddressScreenState extends State<ConfirmAddressScreen> {
   }
 
   Future<void> buscarEndereco(String cep) async {
-    final cepSanitizado = cep.replaceAll(RegExp(r'\D'), ''); 
+    final cepSanitizado = cep.replaceAll(RegExp(r'\D'), '');
     final viaCepSearchCep = ViaCepSearchCep();
 
     try {
       final result = await viaCepSearchCep.searchInfoByCep(cep: cepSanitizado);
-
       result.fold(
         (error) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -77,6 +75,15 @@ class ConfirmAddressScreenState extends State<ConfirmAddressScreen> {
     }
   }
 
+  InputDecoration _inputDecoration(String label, {IconData? icon}) {
+    return InputDecoration(
+      labelText: label,
+      prefixIcon: icon != null ? Icon(icon) : null,
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+      contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
@@ -85,15 +92,21 @@ class ConfirmAddressScreenState extends State<ConfirmAddressScreen> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.pushReplacementNamed(context, '/login');
       });
-      return Scaffold(
+      return const Scaffold(
         body: Center(child: CircularProgressIndicator()),
       );
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text('Confirmar Endereço')),
+      appBar: AppBar(
+        title: const Text('Confirmar Endereço'),
+        backgroundColor: const Color.fromARGB(255, 1, 88, 10),
+        foregroundColor: Colors.white,
+        centerTitle: true,
+      ),
+      
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),        
         child: Form(
           key: _formKey,
           child: ListView(
@@ -102,62 +115,75 @@ class ConfirmAddressScreenState extends State<ConfirmAddressScreen> {
                 controller: cepController,
                 inputFormatters: [cepFormatter],
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'CEP'),
+                decoration: _inputDecoration('CEP', icon: Icons.location_on),
                 validator: (value) {
                   if (value == null || value.isEmpty) return 'Informe o CEP';
                   if (!RegExp(r'^\d{2}\.\d{3}-\d{3}$').hasMatch(value)) return 'CEP inválido';
                   return null;
                 },
-                onFieldSubmitted: (value) {
-                  buscarEndereco(value); 
-                },
+                onFieldSubmitted: buscarEndereco,
               ),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: ruaController,
-                decoration: InputDecoration(labelText: 'Rua'),
+                decoration: _inputDecoration('Rua', icon: Icons.streetview),
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r"[a-zA-ZÀ-ÿ\s]")),
                 ],
                 validator: (value) => value == null || value.isEmpty ? 'Informe a rua' : null,
               ),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: numeroController,
-                decoration: InputDecoration(labelText: 'Número'),
+                decoration: _inputDecoration('Número', icon: Icons.home),
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 validator: (value) => value == null || value.isEmpty ? 'Informe o número' : null,
               ),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: cidadeController,
-                decoration: InputDecoration(labelText: 'Cidade'),
+                decoration: _inputDecoration('Cidade', icon: Icons.location_city),
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r"[a-zA-ZÀ-ÿ\s]")),
                 ],
                 validator: (value) => value == null || value.isEmpty ? 'Informe a cidade' : null,
               ),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: estadoController,
-                decoration: InputDecoration(labelText: 'Estado'),
+                decoration: _inputDecoration('Estado', icon: Icons.map),
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r"[a-zA-ZÀ-ÿ\s]")),
                 ],
                 validator: (value) => value == null || value.isEmpty ? 'Informe o estado' : null,
               ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState?.validate() ?? false) {
-                    authProvider.updateUserAddress(
-                      cepController.text,
-                      ruaController.text,
-                      numeroController.text,
-                      cidadeController.text,
-                      estadoController.text,
-                    );
-                    Navigator.pushNamed(context, '/payment-method');
-                  }
-                },
-                child: Text('Próximo'),
+              const SizedBox(height: 30),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    backgroundColor: const Color.fromARGB(255, 1, 88, 10),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  icon: const Icon(Icons.arrow_forward, color: Colors.white),
+                  label: const Text('Próximo', style: TextStyle(color: Colors.white, fontSize: 16)),
+                  onPressed: () {
+                    if (_formKey.currentState?.validate() ?? false) {
+                      authProvider.updateUserAddress(
+                        cepController.text,
+                        ruaController.text,
+                        numeroController.text,
+                        cidadeController.text,
+                        estadoController.text,
+                      );
+                      Navigator.pushNamed(context, '/payment-method');
+                    }
+                  },
+                ),
               ),
             ],
           ),

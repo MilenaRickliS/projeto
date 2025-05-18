@@ -18,7 +18,9 @@ class FilteredProductsScreen extends StatelessWidget {
       return MainScaffold(
         selectedIndex: 0, 
         body: Scaffold(
-        appBar: AppBar(title: Text('Categoria: $category')),
+        appBar: AppBar(title: Text('Categoria: $category', 
+          style: TextStyle(color: Color.fromARGB(255, 1, 88, 10), fontWeight: FontWeight.bold)
+        ), backgroundColor: Colors.grey[200],  ),
         body: products.isEmpty
             ? Center(child: Text('Nenhum produto encontrado.'))
             : GridView.builder(

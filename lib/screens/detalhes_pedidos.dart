@@ -11,37 +11,114 @@ class OrderDetailScreen extends StatelessWidget {
     final itens = List<Map<String, dynamic>>.from(pedido['itens'] ?? []);
 
     return MainScaffold(
-      selectedIndex: 0, 
+      selectedIndex: 0,
       body: Scaffold(
-      appBar: AppBar(
-        title: Text('Detalhes do Pedido #${pedido['uidPedido']}'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            Text('Total: R\$ ${pedido['total']?.toStringAsFixed(2) ?? '0.00'}',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            SizedBox(height: 8),
-            Text('Forma de Pagamento: ${pedido['formaPagamento']}'),
-            SizedBox(height: 8),
-            Text('Endereço de Entrega:',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            Text(
-                '${pedido['rua']}, ${pedido['numeroCasa']} - ${pedido['cidade']}/${pedido['estado']}'),
-            Divider(height: 32),
-            Text('Itens do Pedido:',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            ...itens.map((item) {
-            return ListTile(
-              title: Text(item['nome'] ?? ''),
-              subtitle: Text('Quantidade: ${item['quantidade']}'),
-              trailing: Text('R\$ ${item['preco']?.toStringAsFixed(2) ?? '0.00'}'),
-            );
-          })
-          ],
+        appBar: AppBar(
+          title: Text('Pedido #${pedido['uidPedido']}', style: TextStyle(color: Colors.white),),
+          backgroundColor: const Color.fromARGB(255, 1, 88, 10),
+          centerTitle: true,
+          elevation: 2,
+          leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
         ),
-      ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListView(
+            children: [
+              // Total
+              Card(
+                elevation: 3,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                margin: const EdgeInsets.only(bottom: 16),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Total:',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'R\$ ${pedido['total']?.toStringAsFixed(2) ?? '0.00'}',
+                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 1, 88, 10)),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              // Forma de pagamento
+              Card(
+                elevation: 3,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                margin: const EdgeInsets.only(bottom: 16),
+                child: ListTile(
+                  leading: const Icon(Icons.payment, color: Color.fromARGB(255, 1, 88, 10)),
+                  title: const Text(
+                    'Forma de Pagamento',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(pedido['formaPagamento'] ?? ''),
+                ),
+              ),
+
+              // Endereço de entrega
+              Card(
+                elevation: 3,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                margin: const EdgeInsets.only(bottom: 16),
+                child: ListTile(
+                  leading: const Icon(Icons.location_on, color: Color.fromARGB(255, 1, 88, 10)),
+                  title: const Text(
+                    'Endereço de Entrega',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(
+                    '${pedido['rua'] ?? ''}, ${pedido['numeroCasa'] ?? ''} - ${pedido['cidade'] ?? ''}/${pedido['estado'] ?? ''}',
+                    style: const TextStyle(height: 1.3),
+                  ),
+                ),
+              ),
+
+              // Itens do pedido
+              Text(
+                'Itens do Pedido',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 1, 88, 10),
+                ),
+              ),
+              const SizedBox(height: 8),
+              ...itens.map((item) {
+                return Card(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  elevation: 2,
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    title: Text(
+                      item['nome'] ?? '',
+                      style: const TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    subtitle: Text('Quantidade: ${item['quantidade']}'),
+                    trailing: Text(
+                      'R\$ ${item['preco']?.toStringAsFixed(2) ?? '0.00'}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 1, 88, 10),
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ],
+          ),
+        ),
       ),
     );
   }
