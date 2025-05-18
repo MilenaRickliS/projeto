@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto/widgets/menu.dart';
+import 'package:projeto/widgets/shimmer.dart';
 import '../models/product.dart';
 import '../services/api_service.dart';
 import '../widgets/product_item.dart';
@@ -97,7 +98,7 @@ Widget build(BuildContext context) {
           ),
           const SizedBox(height: 16),
           _isLoading
-              ? const Expanded(child: Center(child: CircularProgressIndicator()))
+              ? const Expanded(child: ProductGridShimmer())
               : _filteredProducts.isEmpty
                   ? const Expanded(
                       child: Center(
@@ -128,7 +129,7 @@ Widget build(BuildContext context) {
                             ProductItem(product: _filteredProducts[i]),
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          childAspectRatio: 3 / 4,
+                          childAspectRatio: 3 / 4.5,
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
                         ),

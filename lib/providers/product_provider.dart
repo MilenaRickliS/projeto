@@ -8,6 +8,7 @@ class ProductProvider with ChangeNotifier {
   List<Product> get products => _products;
 
   Future<void> fetchProducts() async {
+    if (_products.isNotEmpty) return;
     _products = await ApiService.fetchProducts();
     notifyListeners();
   }

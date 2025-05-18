@@ -44,6 +44,9 @@ class Cart with ChangeNotifier {
     _items = [];
     notifyListeners();
   }
+  int get itemCount {
+    return _items.fold(0, (total, item) => total + item.quantity);
+  }
 
   double get totalAmount {
     return _items.fold(0, (sum, item) => sum + item.totalPrice);
