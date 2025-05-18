@@ -1,16 +1,50 @@
-# projeto
+# 🌟 Projeto Flutter - Aplicativo Mobile Loja Cosméticos
 
-A new Flutter project.
+Este é um aplicativo desenvolvido com Flutter, com o objetivo de expor e vender produtos cosméticos.
 
-## Getting Started
+## 🚀 Funcionalidades Principais
 
-This project is a starting point for a Flutter application.
+- Interface responsiva e moderna.
+- Suporte a múltiplos filtros e interações com usuário.
+- Integração com API externa para produtos.
+- Integração com Firebase (Autenticação de usuários e Pedidos de usuários)
+- Sistema de pesquisa, favoritos, cadastro/login, carrinho de compras, filtro por categorias, visualização de pedidos
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 📱 Tecnologias Utilizadas
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Flutter](https://flutter.dev/) (Dart)
+- [Provider](https://pub.dev/packages/provider) (gerenciamento de estado)
+- Firebase 
+- HTTP
+- UUID
+-LOGGER
+-FLUTTER_MASKED_TEXT2
+- MASK_TEXT_INPUT_FORMATTER
+- SEARCH_CEP
+- CAROUSEL_SLIDER
+- SHIMMER
+- FLUTTER_LAUNCHER_ICONS
+
+## 🛠️ Como Instalar e Rodar o Projeto
+
+### Pré-requisitos
+
+Certifique-se de ter os seguintes itens instalados:
+
+- [Flutter SDK](https://docs.flutter.dev/get-started/install)
+- [Dart SDK]
+- [Android Studio](https://developer.android.com/studio) ou [VS Code](https://code.visualstudio.com/)
+- Emulador Android ou dispositivo físico
+- Conta e projeto no [Firebase](https://firebase.google.com/) (caso usado)
+
+### Passos
+
+1. **Clone o repositório:**
+
+```bash
+git clone https://github.com/MilenaRickliS/projeto.git
+cd projeto
+
+- FLUTTER PUB GET
+- 

@@ -36,12 +36,13 @@ dependencies:
   firebase_core: ^3.13.0
   firebase_auth: ^5.5.3
   cloud_firestore: ^5.6.7
-  logger: ^1.0.0
+  logger: ^2.5.0
   flutter_masked_text2: ^0.9.0
   mask_text_input_formatter: ^2.3.0
   search_cep: ^4.0.2
   carousel_slider: ^5.0.0
-  shimmer: ^2.0.0
+  shimmer: ^3.0.0
+  flutter_launcher_icons: ^0.14.3
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -51,13 +52,16 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.3
+  flutter_native_splash: ^2.4.6
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -71,6 +75,17 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+
+flutter_icons:
+  android: true
+  ios: false
+  image_path: "assets/icons/app_icon.jpg"
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/icons/app_icon.jpg
+  android: true
+  ios: false
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -102,3 +117,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
