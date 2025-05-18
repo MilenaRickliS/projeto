@@ -99,7 +99,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                     label: 'Telefone',
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) return 'Telefone obrigatório';
-                      if (!RegExp(r"^\d{10,11}$").hasMatch(value)) return 'Telefone inválido, digite nesse formato(xx)xxxxx-xxxx';
+                      
                       return null;
                     },
                   ),
@@ -108,7 +108,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                     label: 'CEP',
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) return 'CEP obrigatório';
-                      if (!RegExp(r"^\d{5}-?\d{3}$").hasMatch(value)) return 'CEP inválido, digite nesse formato xx.xxx-xxx';
+                      
                       return null;
                     },
                     onFieldSubmitted: (value) => buscarEndereco(value),
