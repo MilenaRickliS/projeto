@@ -74,7 +74,7 @@ class PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   },
                 ),
               );
-            }).toList(),
+            }),
             const Spacer(),
             SizedBox(
               width: double.infinity,

@@ -23,7 +23,7 @@ class OrdersScreen extends StatelessWidget {
     }
 
     return MainScaffold(
-      selectedIndex: 0,
+      selectedIndex: 3,
       body: Scaffold(
         appBar: AppBar(
           title: const Text('Meus Pedidos', style: TextStyle(color: Colors.white),),

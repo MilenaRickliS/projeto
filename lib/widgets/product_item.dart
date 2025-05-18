@@ -74,7 +74,7 @@ class ProductItemState extends State<ProductItem> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.9),
+                            color: Colors.white.withAlpha(230),
                             shape: BoxShape.circle,
                             boxShadow: const [
                               BoxShadow(

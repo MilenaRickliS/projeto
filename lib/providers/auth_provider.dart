@@ -101,5 +101,38 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> updateUser({
+    required String nome,
+    required String telefone,
+    required String cep,
+    required String rua,
+    required String numeroCasa,
+    required String cidade,
+    required String estado,
+  }) async {
+    if (_user == null) return;
+
+    _user!.nome = nome;
+    _user!.telefone = telefone;
+    _user!.cep = cep;
+    _user!.rua = rua;
+    _user!.numeroCasa = numeroCasa;
+    _user!.cidade = cidade;
+    _user!.estado = estado;
+
+    await _firestore.collection('usuarios').doc(_user!.uid).update({
+      'nome': nome,
+      'telefone': telefone,
+      'cep': cep,
+      'rua': rua,
+      'numeroCasa': numeroCasa,
+      'cidade': cidade,
+      'estado': estado,
+    });
+
+    notifyListeners();
+  }
+
+
 
 }

@@ -52,8 +52,7 @@ class _SearchScreenState extends State<SearchScreen> {
       _filteredProducts = _allProducts.where((product) {
         final nameMatch = product.name.toLowerCase().contains(query);
         final priceMatch = double.tryParse(query) != null &&
-            product.price != null &&
-            product.price! <= double.parse(query);
+          product.price <= double.parse(query);
         return nameMatch || priceMatch;
       }).toList();
     });

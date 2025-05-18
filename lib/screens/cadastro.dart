@@ -217,8 +217,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     decoration:
                         buildInputDecoration('Data de Nascimento (dd/mm/aaaa)'),
                     validator: (value) {
-                      if (value == null || value.isEmpty)
+                      if (value == null || value.isEmpty) {
                         return 'Informe a data de nascimento';
+                      }
                       if (!isValidDate(value)) return 'Data inválida';
                       return null;
                     },
@@ -260,8 +261,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     decoration: buildInputDecoration('CEP'),
                     validator: (value) {
                       if (value == null || value.isEmpty) return 'Informe o CEP';
-                      if (!RegExp(r'^\d{2}\.\d{3}-\d{3}$').hasMatch(value))
+                      if (!RegExp(r'^\d{2}\.\d{3}-\d{3}$').hasMatch(value)) {
                         return 'CEP inválido';
+                      }
                       return null;
                     },
                     onFieldSubmitted: (value) => buscarEndereco(value),

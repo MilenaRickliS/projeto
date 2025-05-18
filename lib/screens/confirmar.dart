@@ -46,7 +46,7 @@ class ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
               child: Card(
                 elevation: 4,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                shadowColor: Colors.green.withOpacity(0.3),
+                shadowColor: Colors.green.withAlpha(230),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
                   child: Column(
@@ -105,7 +105,7 @@ class ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                   ),
                 ),
               );
-            }).toList(),
+            }),
             const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -138,7 +138,7 @@ class ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                   textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 onPressed: () async {
-                  if (user == null || cart.items.isEmpty) return;
+                  if (cart.items.isEmpty) return;
 
                   final pedido = OrderModel(
                     uidPedido: const Uuid().v4(),
