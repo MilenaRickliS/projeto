@@ -20,7 +20,6 @@ class _CartScreenState extends State<CartScreen> {
   @override
   void initState() {
     super.initState();
-    // Ativa a animação após o frame inicial
     Future.delayed(Duration.zero, () {
       setState(() {
         _opacity = 1;
@@ -89,7 +88,7 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     ),
                   ),
-                  // Aqui o AnimatedOpacity
+                  // AnimatedOpacity
                   Expanded(
                     child: AnimatedOpacity(
                       opacity: _opacity,

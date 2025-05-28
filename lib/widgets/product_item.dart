@@ -124,7 +124,7 @@ class ProductItemState extends State<ProductItem> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // texto preço
+                  
                   Text(
                     'R\$ ${widget.product.price.toStringAsFixed(2)}',
                     style: const TextStyle(
@@ -135,7 +135,7 @@ class ProductItemState extends State<ProductItem> {
                   ),
                   const SizedBox(height: 8),
 
-                  // botão
+                 
                   SizedBox(
                     width: double.infinity,
                     height: 36,
