@@ -181,7 +181,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value == null || value.isEmpty) return 'Informe o email';
-                      if (!value.contains('@')) return 'Email inválido';
+                      if (!value.contains('@') || !value.endsWith('.com')) return 'Email inválido (formato esperado email@dominio.com)';
                       return null;
                     },
                   ),
